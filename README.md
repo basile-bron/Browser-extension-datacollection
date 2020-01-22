@@ -1,1 +1,1 @@
-# Browser-extension-datacollection
+# browser-extension-datacollection
