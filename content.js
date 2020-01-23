@@ -41,7 +41,7 @@ function createButton(pct) {
 	$(btn).css('text-decoration', 'none');
 	$(btn).css('display', 'inline-block');
 	$(btn).css('font-size', '16px');
-	$(btn).css('margin-top', '10px');
+	$(btn).css('margin-top', '5px');
 
 
 	$(btn).appendTo(span);
@@ -49,12 +49,13 @@ function createButton(pct) {
 }
 
 setTimeout(function(){
-	$("#info").append('<h2>How toxic is this video ? </h2>');
 				createButton(0);
 				createButton(25);
 				createButton(50);
 				createButton(75);
 				createButton(100);
+				$("#info").append('<h2>How toxic is this video ? </h2>');
+
 
 },5000);
 
