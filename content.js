@@ -1,7 +1,8 @@
+var video_title;
 var video_id = window.location.search.split('v=')[1];
 
 function sendData(pct) {
-	$.get('https://script.google.com/macros/s/AKfycbzI247_IE8Dmdkvx1l_oZ4ULa1FzXnjXxO3bmwN4OPkh0lgjMKI/exec?video_id=' + video_id + "&pct=" + pct)
+	$.get('https://script.google.com/macros/s/AKfycbzI247_IE8Dmdkvx1l_oZ4ULa1FzXnjXxO3bmwN4OPkh0lgjMKI/exec?video_title=' + encodeURIComponent(video_title) + '&video_id=' + video_id + "&pct=" + pct)
 		.then(function(data) {
 			if (data === 'success') {
 				$("#info").append('<h2> success </h2>');
@@ -31,6 +32,7 @@ function createButton(pct) {
 
 setTimeout(function(){
 	var video_id = window.location.search.split('v=')[1];
+	video_title = $('#info .title > yt-formatted-string').text();
 	var ampersandPosition = video_id.indexOf('&');
 	if(ampersandPosition != -1) {
   		video_id = video_id.substring(0, ampersandPosition);
