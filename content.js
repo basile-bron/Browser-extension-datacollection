@@ -49,6 +49,7 @@ function createButton(pct) {
 }
 
 setTimeout(function(){
+	$("#info").append('<h2>How toxic is this video ? </h2>');
 				createButton(0);
 				createButton(25);
 				createButton(50);
