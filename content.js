@@ -12,7 +12,7 @@ function sendData(pct) {
 	$.get('https://script.google.com/macros/s/AKfycbzI247_IE8Dmdkvx1l_oZ4ULa1FzXnjXxO3bmwN4OPkh0lgjMKI/exec?video_title=' + encodeURIComponent(video_title) + '&video_id=' + video_id + "&pct=" + pct)
 		.then(function(data) {
 			if (data === 'success') {
-				$("#info").append('<h2> success </h2>');
+				console.log('success');
 			} else {
 				alert('Error?');
 			}
