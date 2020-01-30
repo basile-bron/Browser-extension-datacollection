@@ -23,7 +23,7 @@ function sendData(pct) {
 		});
 }
 
-function createButton(pct) {
+function createButton(pct, color) {
 
 
 	let span = document.createElement('span');
@@ -33,7 +33,7 @@ function createButton(pct) {
 	btn.onclick = function() {
 		sendData(pct);
 	};
-	$(btn).css('background-color','#00c4ff');
+	$(btn).css('background-color', color);
 	$(btn).css('border', '1px solid white');
 	$(btn).css('color', 'white');
 	$(btn).css('padding', '10px 32px');
@@ -49,11 +49,11 @@ function createButton(pct) {
 }
 
 setTimeout(function(){
-				createButton(0);
-				createButton(25);
-				createButton(50);
-				createButton(75);
-				createButton(100);
+				createButton(0, "#00c4ff");
+				createButton(25, "#caff00");
+				createButton(50, "#ffd600");
+				createButton(75, "#ff8f00");
+				createButton(100, "#ff0000");
 				$("#info").append('<h2>How toxic is this video ? </h2>');
 
 
