@@ -47,8 +47,8 @@ function createButton(elementToAddTo ,pct, color, style) {
 	} else if (style == "thumbnail") {
 
 		$(btn).click(function(){
-			video_id = $(this).closest(".details").children(".yt-simple-endpoint").href.split('v=')[1];
-			video_title = $(this).closest(".details").children("#video-title").innerHTML;
+			video_id = this.closest(".details").getElementsByTagName('a')[0].href.split('v=')[1];
+			video_title = this.closest(".details").getElementsByTagName('span')[0].innerText;
 			console.log(video_id);
 			console.log(video_title);
 			sendData(pct, video_id, video_title);
