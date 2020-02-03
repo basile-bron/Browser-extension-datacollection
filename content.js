@@ -1,4 +1,5 @@
 function sendData(pct, video_id, video_title) {
+	console.log('sending score');
 	$.get('https://script.google.com/macros/s/AKfycbzI247_IE8Dmdkvx1l_oZ4ULa1FzXnjXxO3bmwN4OPkh0lgjMKI/exec?video_title=' + encodeURIComponent(video_title) + '&video_id=' + video_id + "&pct=" + pct)
 		.then(function(data) {
 			if (data === 'success') {
@@ -16,10 +17,12 @@ function sendData(pct, video_id, video_title) {
 function createButton(elementToAddTo ,pct, color, style) {
 	let span = document.createElement('span');
 	let btn = document.createElement('button');
+	btn.id = 'skull_button';
 	var video_id;
 	var video_title;
 	$(btn).text(pct);
 	btn.onclick = function() {
+
 		console.log(video_id, video_title);
 		return sendData(pct, video_id, video_title);
 	};
@@ -31,7 +34,6 @@ function createButton(elementToAddTo ,pct, color, style) {
 	  		video_id = video_id.substring(0, ampersandPosition);
 	  	}
 		video_title = $('#info .title > yt-formatted-string').text();
-
 		$(btn).css('background-color', color);
 		$(btn).css('border', '1px solid white');
 		$(btn).css('color', 'white');
@@ -43,9 +45,14 @@ function createButton(elementToAddTo ,pct, color, style) {
 		$(btn).css('margin-top', '5px');
 
 	} else if (style == "thumbnail") {
-		video_id = document.getElementById("thumbnail").href.split('v=')[1];
-		video_title = $('#video-title').innerText;
 
+		$(btn).click(function(){
+			video_id = $(this).closest(".details").children(".yt-simple-endpoint").href.split('v=')[1];
+			video_title = $(this).closest(".details").children("#video-title").innerHTML;
+			console.log(video_id);
+			console.log(video_title);
+			sendData(pct, video_id, video_title);
+		});
 		$(btn).css('background-color', color);
 		$(btn).css('border', '0px solid white');
 		$(btn).css('color', 'white');
@@ -63,7 +70,7 @@ function createButton(elementToAddTo ,pct, color, style) {
 function ratingBar(elementToAddTo, style){
 	createButton(elementToAddTo, 0, "#00c4ff", style);
 	createButton(elementToAddTo, 25, "#1f7ba0", style);
-	createButton(elementToAddTo,  50, "#144d65", style);
+	createButton(elementToAddTo, 50, "#144d65", style);
 	createButton(elementToAddTo, 75, "#0b2733", style);
 	createButton(elementToAddTo, 100, "#02080a", style);
 }
