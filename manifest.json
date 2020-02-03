@@ -6,7 +6,7 @@
   "version": "1.0",
   "content_scripts": [
     {
-  	"matches":  ["https://www.youtube.com/watch*", "https://www.m.youtube.com/watch*", "http://www.youtube.com/watch*"],
+  	"matches":  ["https://www.youtube.com/", "https://www.youtube.com/watch*"],
   	"js": ["jquery.js","content.js"],
   	"run_at": "document_end"
     }
