@@ -27,6 +27,8 @@ function createButton(elementToAddTo ,pct, color, style) {
 		return sendData(pct, video_id, video_title);
 	};
 
+
+
 	if(style == "video"){
 		var video_id = window.location.search.split('v=')[1];
 		var ampersandPosition = video_id.indexOf('&');
@@ -34,7 +36,6 @@ function createButton(elementToAddTo ,pct, color, style) {
 	  		video_id = video_id.substring(0, ampersandPosition);
 	  	}
 		video_title = $('#info .title > yt-formatted-string').text();
-		$(btn).css('background-color', color);
 		$(btn).css('border', '1px solid white');
 		$(btn).css('color', 'white');
 		$(btn).css('padding', '10px 32px');
@@ -43,9 +44,18 @@ function createButton(elementToAddTo ,pct, color, style) {
 		$(btn).css('display', 'inline-block');
 		$(btn).css('font-size', '16px');
 		$(btn).css('margin-top', '5px');
+	} else if (style == "recommended") {
 
-	} else if (style == "thumbnail") {
 
+		$(btn).css('background-color', color);
+		$(btn).css('border', '0px solid white');
+		$(btn).css('color', 'white');
+		$(btn).css('padding', '2px 5px');
+		$(btn).css('text-align', 'center');
+		$(btn).css('text-decoration', 'none');
+		$(btn).css('display', 'inline-block');
+		$(btn).css('font-size', '16px');
+		$(btn).css('margin-top', '2px');
 		$(btn).click(function(){
 			video_id = this.closest(".details").getElementsByTagName('a')[0].href.split('v=')[1];
 			video_title = this.closest(".details").getElementsByTagName('span')[0].innerText;
@@ -53,16 +63,29 @@ function createButton(elementToAddTo ,pct, color, style) {
 			console.log(video_title);
 			sendData(pct, video_id, video_title);
 		});
+	} else if (style == "home_page") {
+
+		elementToAddTo = document.querySelectorAll(".ytd-rich-grid-renderer #dismissable");
 		$(btn).css('background-color', color);
 		$(btn).css('border', '0px solid white');
 		$(btn).css('color', 'white');
-		$(btn).css('padding', '0px 5px');
+		$(btn).css('padding', '2px 23px');
 		$(btn).css('text-align', 'center');
 		$(btn).css('text-decoration', 'none');
 		$(btn).css('display', 'inline-block');
 		$(btn).css('font-size', '16px');
 		$(btn).css('margin-top', '2px');
+		$(btn).click(function(){
+			console.log(this);
+			video_id = this.parentNode.parentNode.querySelector("#details #video-title-link").href.split('v=')[1];
+			video_title = this.parentNode.parentNode.querySelector("#details #video-title").innerText;
+			console.log(video_id);
+			console.log(video_title);
+			sendData(pct, video_id, video_title);
+		});
 	}
+
+
 	$(btn).appendTo(span);
 	$(span).appendTo(elementToAddTo);
 }
@@ -76,10 +99,12 @@ function ratingBar(elementToAddTo, style){
 }
 
 setTimeout(function(){
-	ratingBar(".details", "thumbnail");
+	ratingBar(".ytd-rich-grid-renderer", "home_page");
 
 	//if it is a video page
 	if (window.location.href.indexOf("watch") > -1) {
+		ratingBar(".details", "recommended");
+
 		$("#info").append('<h2>How toxic is this video ? </h2>');
 		ratingBar("#info", "video");
   }
