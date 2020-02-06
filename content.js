@@ -109,4 +109,4 @@ setTimeout(function(){
 		ratingBar("#info", "video");
   }
 
-},5000);
+},7000);
