@@ -1,0 +1,7 @@
+{
+    "name": "tfjs_ner",
+    "version": "2.1.0",
+    "dependencies": {
+        "express": "latest"
+    }
+}
