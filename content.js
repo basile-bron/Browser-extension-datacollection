@@ -111,7 +111,7 @@ setTimeout(function(){
 			console.log(video[i].parentElement.querySelector("#details #video-title").innerText);
 
 			$.ajax({
-			       url : "http://localhost:8080/"+video[i].parentNode.querySelector("#details #video-title").innerText+"?toto="+i,
+			       url : "http://api.basile-bron.fr/"+video[i].parentNode.querySelector("#details #video-title").innerText+"?toto="+i,
 			       type : 'GET',
 			       dataType : 'json', // On désire recevoir du HTML
 			       success : function(data){ // code_html contient le HTML renvoyé
