@@ -95,7 +95,6 @@ function createButton(elementToAddTo ,pct, color, style) {
 function ratingBar(elementToAddTo, style){
 	//video_title = #code qui me faut
 	//predict(video_title.toString())
-	//createButton(elementToAddTo, predictedScore, "#00c4ff", style);
 	createButton(elementToAddTo, 0, "#00c4ff", style);
 	createButton(elementToAddTo, 25, "#1f7ba0", style);
 	createButton(elementToAddTo, 50, "#144d65", style);
@@ -111,34 +110,28 @@ setTimeout(function(){
 			console.log(video[i].parentElement.querySelector("#details #video-title").innerText);
 
 			$.ajax({
-			       url : "http://api.basile-bron.fr/"+video[i].parentNode.querySelector("#details #video-title").innerText+"?toto="+i,
+			       url : "https://basile-bron.fr/"+video[i].parentNode.querySelector("#details #video-title").innerText+"?toto="+i,
 			       type : 'GET',
 			       dataType : 'json', // On désire recevoir du HTML
 			       success : function(data){ // code_html contient le HTML renvoyé
-							 var toto = this.url.split('toto=')[1]
-							 console.log(toto)
+							var toto = this.url.split('toto=')[1]
+							var data = parseFloat(data);
 							$(video[toto]).parent().append("<p>"+data+"</p>")
-							if (data > 0.5) {
-								$($(video[toto]).closest("#dismissable")[0]).attr('style', 'filter: blur(10px) !important');
-								$($(video[toto]).closest("#dismissable")[0]).mouseenter(function() {
-	    						$(this).attr("style", "filter : blur(0px)");
-								}).mouseleave(function() {
-	     							$(this).attr("style", "filter: blur(10px)  !important");
-								});
+
+							if (data > 0.6) {
+								$(video[toto]).closest("#dismissable").attr('style', 'filter: blur(10px) !important');
 
 							}
-
-		 					console.log(data);
 			       }
 		    });
 		}
 	}
 
-	//ratingBar(".ytd-rich-grid-renderer", "home_page");
+	ratingBar(".ytd-rich-grid-renderer", "home_page");
 
 	//if it is a video page
 	if (window.location.href.indexOf("watch") > -1) {
-		ratingBar(".details", "recommended");
+		//ratingBar(".details", "recommended");
 		//var video_title = $(".ytd-video-primary-info-renderer").innerText;
 		//$(".ytd-video-primary-info-renderer").append('<h1>'+ predict(video_title).toString() +'</h1>');
 		ratingBar("#info", "video");
